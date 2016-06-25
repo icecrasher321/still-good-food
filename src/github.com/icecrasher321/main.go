@@ -24,5 +24,5 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Printf("%s", b)
+	fmt.Printf("%s\n", b)
 }
