@@ -3,7 +3,11 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+<<<<<<< HEAD
 	"github.com/sleepypikachu/still-good-food/food"
+=======
+	"github.com/sleepypikachu/food"
+>>>>>>> 27ac30aa7d8c1642c8692e2708197bdfca74f587
 	"os"
 )
 
