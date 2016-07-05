@@ -1,0 +1,226 @@
+!<arch>
+__.PKGDEF       0           0     0     644     9926      `
+go object darwin amd64 go1.5.1 X:none
+build id "57df0b1ef58ae48c35ba400f27339f6cba90a312"
+
+$$
+package testsuite
+	import runtime "runtime"
+	import errors "errors"
+	import ioutil "io/ioutil"
+	import os "os"
+	import filepath "path/filepath"
+	import strings "strings"
+	import regexp "regexp"
+	import path "path"
+	type @"".TestSuite struct { Path string; PackageName string; IsGinkgo bool; Precompiled bool }
+	func @"".PrecompiledTestSuite (@"".pathÂ·3 string) (? @"".TestSuite, ? error)
+	func @"".SuitesInDir (@"".dirÂ·2 string, @"".recurseÂ·3 bool) (? []@"".TestSuite)
+	import time "time" // indirect
+	type @"time".zone struct { @"time".name string; @"time".offset int; @"time".isDST bool }
+	type @"time".zoneTrans struct { @"time".when int64; @"time".index uint8; @"time".isstd bool; @"time".isutc bool }
+	type @"time".Location struct { @"time".name string; @"time".zone []@"time".zone; @"time".tx []@"time".zoneTrans; @"time".cacheStart int64; @"time".cacheEnd int64; @"time".cacheZone *@"time".zone }
+	func (@"time".lÂ·2 *@"time".Location "esc:0x22") String () (? string)
+	func (@"time".lÂ·2 *@"time".Location "esc:0x1") @"time".firstZoneUsed () (? bool)
+	func (@"time".lÂ·2 *@"time".Location "esc:0x12") @"time".get () (? *@"time".Location)
+	func (@"time".lÂ·6 *@"time".Location "esc:0x32") @"time".lookup (@"time".secÂ·7 int64) (@"time".nameÂ·1 string, @"time".offsetÂ·2 int, @"time".isDSTÂ·3 bool, @"time".startÂ·4 int64, @"time".endÂ·5 int64)
+	func (@"time".lÂ·2 *@"time".Location "esc:0x1") @"time".lookupFirstZone () (? int)
+	func (@"time".lÂ·4 *@"time".Location "esc:0x1") @"time".lookupName (@"time".nameÂ·5 string "esc:0x1", @"time".unixÂ·6 int64) (@"time".offsetÂ·1 int, @"time".isDSTÂ·2 bool, @"time".okÂ·3 bool)
+	type @"time".Duration int64
+	func (@"time".dÂ·2 @"time".Duration) Hours () (? float64) { var @"time".hourÂ·3 @"time".Duration; ; @"time".hourÂ·3 = @"time".dÂ·2 / @"time".Duration(0x34630b8a000); var @"time".nsecÂ·4 @"time".Duration; ; @"time".nsecÂ·4 = @"time".dÂ·2 % @"time".Duration(0x34630b8a000); return float64(@"time".hourÂ·3) + float64(@"time".nsecÂ·4) * 8190022623310637111963488201822504381538623676021880892417778544696899264837610290203272971060556344039023584360473938041055625214280336402169897364226048p-553 }
+	func (@"time".dÂ·2 @"time".Duration) Minutes () (? float64) { var @"time".minÂ·3 @"time".Duration; ; @"time".minÂ·3 = @"time".dÂ·2 / @"time".Duration(0xdf8475800); var @"time".nsecÂ·4 @"time".Duration; ; @"time".nsecÂ·4 = @"time".dÂ·2 % @"time".Duration(0xdf8475800); return float64(@"time".minÂ·3) + float64(@"time".nsecÂ·4) * 7678146209353722106395056769533233877065564876941352542109479049699919628723768656821910653339403201031675627614471533358284117434246264392176261853609984p-547 }
+	func (@"time".dÂ·2 @"time".Duration) Nanoseconds () (? int64) { return int64(@"time".dÂ·2) }
+	func (@"time".dÂ·2 @"time".Duration) Seconds () (? float64) { var @"time".secÂ·3 @"time".Duration; ; @"time".secÂ·3 = @"time".dÂ·2 / @"time".Duration(0x3b9aca00); var @"time".nsecÂ·4 @"time".Duration; ; @"time".nsecÂ·4 = @"time".dÂ·2 % @"time".Duration(0x3b9aca00); return float64(@"time".secÂ·3) + float64(@"time".nsecÂ·4) * 7198262071269114660816079141112770740375861891461678802759824945047098083990024106014198994535558872472104883612039846078596891298747423852523262413111296p-541 }
+	func (@"time".dÂ·2 @"time".Duration) String () (? string)
+	type @"time".Month int
+	func (@"time".mÂ·2 @"time".Month) String () (? string) { return @"time".months[@"time".mÂ·2 - @"time".Month(0x1)] }
+	type @"time".Weekday int
+	func (@"time".dÂ·2 @"time".Weekday) String () (? string) { return @"time".days[@"time".dÂ·2] }
+	type @"time".Time struct { @"time".sec int64; @"time".nsec int32; @"time".loc *@"time".Location }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Add (@"time".dÂ·3 @"time".Duration) (? @"time".Time) { @"time".tÂ·2.@"time".sec += int64(@"time".dÂ·3 / @"time".Duration(0x3b9aca00)); var @"time".nsecÂ·4 int32; ; @"time".nsecÂ·4 = int32(@"time".tÂ·2.@"time".nsec) + int32(@"time".dÂ·3 % @"time".Duration(0x3b9aca00)); if @"time".nsecÂ·4 >= 0x3b9aca00 { @"time".tÂ·2.@"time".sec++; @"time".nsecÂ·4 -= 0x3b9aca00 } else { if @"time".nsecÂ·4 < 0x0 { @"time".tÂ·2.@"time".sec--; @"time".nsecÂ·4 += 0x3b9aca00 } }; @"time".tÂ·2.@"time".nsec = @"time".nsecÂ·4; return @"time".tÂ·2 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") AddDate (@"time".yearsÂ·3 int, @"time".monthsÂ·4 int, @"time".daysÂ·5 int) (? @"time".Time)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") After (@"time".uÂ·3 @"time".Time "esc:0x1") (? bool) { return @"time".tÂ·2.@"time".sec > @"time".uÂ·3.@"time".sec || @"time".tÂ·2.@"time".sec == @"time".uÂ·3.@"time".sec && @"time".tÂ·2.@"time".nsec > @"time".uÂ·3.@"time".nsec }
+	func (@"time".tÂ·2 @"time".Time "esc:0x9") AppendFormat (@"time".bÂ·3 []byte "esc:0x1a", @"time".layoutÂ·4 string "esc:0x9") (? []byte)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Before (@"time".uÂ·3 @"time".Time "esc:0x1") (? bool) { return @"time".tÂ·2.@"time".sec < @"time".uÂ·3.@"time".sec || @"time".tÂ·2.@"time".sec == @"time".uÂ·3.@"time".sec && @"time".tÂ·2.@"time".nsec < @"time".uÂ·3.@"time".nsec }
+	func (@"time".tÂ·4 @"time".Time "esc:0x1") Clock () (@"time".hourÂ·1 int, @"time".minÂ·2 int, @"time".secÂ·3 int)
+	func (@"time".tÂ·4 @"time".Time "esc:0x1") Date () (@"time".yearÂ·1 int, @"time".monthÂ·2 @"time".Month, @"time".dayÂ·3 int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Day () (? int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Equal (@"time".uÂ·3 @"time".Time "esc:0x1") (? bool) { return @"time".tÂ·2.@"time".sec == @"time".uÂ·3.@"time".sec && @"time".tÂ·2.@"time".nsec == @"time".uÂ·3.@"time".nsec }
+	func (@"time".tÂ·2 @"time".Time "esc:0x9") Format (@"time".layoutÂ·3 string "esc:0x9") (? string)
+	func (@"time".tÂ·2 *@"time".Time "esc:0x1") GobDecode (@"time".dataÂ·3 []byte "esc:0x1") (? error)
+	func (@"time".tÂ·3 @"time".Time "esc:0x1") GobEncode () (? []byte, ? error)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Hour () (? int)
+	func (@"time".tÂ·3 @"time".Time "esc:0x1") ISOWeek () (@"time".yearÂ·1 int, @"time".weekÂ·2 int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") In (@"time".locÂ·3 *@"time".Location "esc:0x12") (? @"time".Time)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") IsZero () (? bool) { return @"time".tÂ·2.@"time".sec == 0x0 && @"time".tÂ·2.@"time".nsec == 0x0 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Local () (? @"time".Time) { @"time".tÂ·2.@"time".loc = @"time".Local; return @"time".tÂ·2 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Location () (? *@"time".Location) { var @"time".lÂ·3 *@"time".Location; ; @"time".lÂ·3 = @"time".tÂ·2.@"time".loc; if @"time".lÂ·3 == nil { @"time".lÂ·3 = @"time".UTC }; return @"time".lÂ·3 }
+	func (@"time".tÂ·3 @"time".Time "esc:0x1") MarshalBinary () (? []byte, ? error)
+	func (@"time".tÂ·3 @"time".Time "esc:0x9") MarshalJSON () (? []byte, ? error)
+	func (@"time".tÂ·3 @"time".Time "esc:0x9") MarshalText () (? []byte, ? error)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Minute () (? int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Month () (? @"time".Month)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Nanosecond () (? int) { return int(@"time".tÂ·2.@"time".nsec) }
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Round (@"time".dÂ·3 @"time".Duration) (? @"time".Time)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Second () (? int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x9") String () (? string)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Sub (@"time".uÂ·3 @"time".Time "esc:0x1") (? @"time".Duration)
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") Truncate (@"time".dÂ·3 @"time".Duration) (? @"time".Time)
+	func (@"time".tÂ·2 @"time".Time "esc:0x12") UTC () (? @"time".Time) { @"time".tÂ·2.@"time".loc = @"time".UTC; return @"time".tÂ·2 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Unix () (? int64) { return @"time".tÂ·2.@"time".sec + -0xe7791f700 }
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") UnixNano () (? int64) { return (@"time".tÂ·2.@"time".sec + -0xe7791f700) * 0x3b9aca00 + int64(@"time".tÂ·2.@"time".nsec) }
+	func (@"time".tÂ·2 *@"time".Time "esc:0x1") UnmarshalBinary (@"time".dataÂ·3 []byte "esc:0x1") (? error)
+	func (@"time".tÂ·2 *@"time".Time "esc:0x1") UnmarshalJSON (@"time".dataÂ·3 []byte "esc:0x1") (@"time".errÂ·1 error)
+	func (@"time".tÂ·2 *@"time".Time "esc:0x1") UnmarshalText (@"time".dataÂ·3 []byte "esc:0x1") (@"time".errÂ·1 error)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Weekday () (? @"time".Weekday)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") Year () (? int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") YearDay () (? int)
+	func (@"time".tÂ·3 @"time".Time "esc:0x32") Zone () (@"time".nameÂ·1 string, @"time".offsetÂ·2 int)
+	func (@"time".tÂ·2 @"time".Time "esc:0x1") @"time".abs () (? uint64)
+	func (@"time".tÂ·5 @"time".Time "esc:0x1") @"time".date (@"time".fullÂ·6 bool) (@"time".yearÂ·1 int, @"time".monthÂ·2 @"time".Month, @"time".dayÂ·3 int, @"time".ydayÂ·4 int)
+	func (@"time".tÂ·4 @"time".Time "esc:0x32") @"time".locabs () (@"time".nameÂ·1 string, @"time".offsetÂ·2 int, @"time".absÂ·3 uint64)
+	type @"os".FileMode uint32
+	func (@"os".mÂ·2 @"os".FileMode) IsDir () (? bool) { return @"os".mÂ·2 & @"os".FileMode(0x80000000) != @"os".FileMode(0x0) }
+	func (@"os".mÂ·2 @"os".FileMode) IsRegular () (? bool) { return @"os".mÂ·2 & @"os".FileMode(0x8f000000) == @"os".FileMode(0x0) }
+	func (@"os".mÂ·2 @"os".FileMode) Perm () (? @"os".FileMode) { return @"os".mÂ·2 & @"os".FileMode(0x1ff) }
+	func (@"os".mÂ·2 @"os".FileMode) String () (? string)
+	type @"os".FileInfo interface { IsDir() (? bool); ModTime() (? @"time".Time); Mode() (? @"os".FileMode); Name() (? string); Size() (? int64); Sys() (? interface {}) }
+	func @"".New (@"".dirÂ·2 string, @"".filesÂ·3 []@"os".FileInfo "esc:0x9") (? @"".TestSuite)
+	func @"".init ()
+	var @"time".months [12]string
+	var @"time".days [7]string
+	var @"time".Local *@"time".Location
+	var @"time".UTC *@"time".Location
+
+$$
+_go_.o          0           0     0     644     29541     `
+go object darwin amd64 go1.5.1 X:none
+
+!
+  go13lderrors.aio/ioutil.aos.apath/filepath.aregexp.astrings.apath.a ş."".PrecompiledTestSuite  €  äeH‹%    H„$HÿÿÿH;A†  Hì8  1ÛH‰œ$P  H‰œ$X  H‰œ$`  H‰œ$h  ˆœ$p  ˆœ$q  1ÛH‰œ$x  H‰œ$€  H‹œ$@  H‰$H‹œ$H  H‰\$è    H‹L$H‹D$L‹D$ L‹L$(L‰Œ$   L‰„$ø   Iƒø tJ1öH‰´$P  H‰´$X  H‰´$`  H‰´$h  @ˆ´$p  @ˆ´$q  L‰„$x  L‰Œ$€  HÄ8  ÃH‰„$ğ   H‰$H‰Œ$è   H‹Y ÿÓ¶\$€û „  H    H‰œ$˜   HÇ„$       1ÛH‰\$hH‰\$pH    H‰$è    H‹D$H‰D$0H‹¬$    H‰hH‹¬$˜   €=     …•   H‰(H‰D$0H‹    1íH9ètPH‹L$0E1ÀL‰„$P  L‰„$X  L‰„$`  L‰„$h  Dˆ„$p  Dˆ„$q  H‰„$x  H‰Œ$€  HÄ8  ÃH    H‰$H    H‰\$H    H‰\$è    H‹D$ëH‰$H‰l$è    H‹D$0éVÿÿÿH‹œ$@  H‰$H‹œ$H  H‰\$è    H‹L$H‹D$Hƒø…À  H‰Œ$(  H‰$H‰„$0  H‰D$H-    H‰l$HÇD$   è    ¶\$ €û „  H‹œ$ğ   H‰$H‹œ$è   H‹[0ÿÓ‹\$ƒãIƒû …  H    H‰œ$ˆ   HÇ„$      1ÛH‰\$HH‰\$PH    H‰$è    H‹D$H‰D$0H‹¬$   H‰hH‹¬$ˆ   €=     …•   H‰(H‰D$0H‹    1íH9ètPH‹T$0E1ÀL‰„$P  L‰„$X  L‰„$`  L‰„$h  Dˆ„$p  Dˆ„$q  H‰„$x  H‰”$€  HÄ8  ÃH    H‰$H    H‰\$H    H‰\$è    H‹D$ëH‰$H‰l$è    H‹D$0éVÿÿÿH‹œ$@  H‰$H‹œ$H  H‰\$è    H‹L$H‹D$H‰Œ$(  H‰$H‰„$0  H‰D$è    H‹\$H‰œ$  H‹\$H‰œ$  H‹œ$@  H‰$H‹œ$H  H‰\$è    H‹\$H‰œ$(  H‹\$H‰œ$0  H‹œ$@  H‰$H‹œ$H  H‰\$è    L‹L$L‹\$H‹¼$(  H‹”$0  1ÛH‰\$XH‰\$`H‰¼$¨   H‰”$°   L‰Œ$È   L‰œ$Ğ   L‰ØL9ÚŒ7  H‰ÓL)ÛH‰ÕH‰”$À   H9Ó‡  H)İI‰øH‰¼$¸   Hƒı tMH9Å…î   L‰„$  L‰$H‰¬$   H‰l$L‰Œ$Ø   L‰L$H‰„$à   H‰D$è    L‹œ$Ğ   H‹¼$¨   H‹”$°   ¶\$ H‰Ø< „†   H‰ÓL)ÛH9ÓwtH‰ØH‰ù1ÛH‹¼$  H‹´$  H‰ÍHÇÃ   H‰ÙHÇÃ   H‰¼$P  H‰´$X  H‰¬$`  H‰„$h  ˆŒ$p  ˆœ$q  1ÛH‰œ$x  H‰œ$€  HÄ8  Ãè    H‰ùH‰Ğëƒ1Àécÿÿÿè    1ÀéUÿÿÿH    H‰\$xHÇ„$€      1ÛH‰\$8H‰\$@H    H‰$è    H‹D$H‰D$0H‹¬$€   H‰hH‹l$x€=     …•   H‰(H‰D$0H‹    1íH9ètPH‹T$0E1ÀL‰„$P  L‰„$X  L‰„$`  L‰„$h  Dˆ„$p  Dˆ„$q  H‰„$x  H‰”$€  HÄ8  ÃH    H‰$H    H‰\$H    H‰\$è    H‹D$ëH‰$H‰l$è    H‹D$0éVÿÿÿè    éÎøÿÿZ
+      ü
+  os.Stat   œ       Â  Vgo.string."this is a directory, not a file"     .type.errors.errorString   ¢
+  "runtime.newobject   ê 6runtime.writeBarrierEnabled   –  Bgo.itab.*errors.errorString.error   Ò  0type.*errors.errorString   è  type.error   €  Bgo.itab.*errors.errorString.error   ”
+   runtime.typ2Itab   ¾
+  .runtime.writebarrierptr   	
+  "path/filepath.Ext   ö	  "go.string.".test"   œ
+
+   runtime.eqstring   ğ
+       š  Dgo.string."this is not executable"   è  .type.errors.errorString   ú
+  "runtime.newobject   Â 6runtime.writeBarrierEnabled   î  Bgo.itab.*errors.errorString.error   ª  0type.*errors.errorString   À  type.error   Ø  Bgo.itab.*errors.errorString.error   ì
+   runtime.typ2Itab   –
+  .runtime.writebarrierptr   æ
+  "path/filepath.Dir   ¶
+  "".relPath   ¦
+  $path/filepath.Base   –
+  "path/filepath.Ext    
+   runtime.eqstring   ø
+  $runtime.panicslice   ¤
+  $runtime.panicslice   Ä  Lgo.string."this is not a .test binary"   Œ  .type.errors.errorString   
+  "runtime.newobject   à 6runtime.writeBarrierEnabled   Œ  Bgo.itab.*errors.errorString.error   È  0type.*errors.errorString   Ş  type.error   ö  Bgo.itab.*errors.errorString.error   Š
+   runtime.typ2Itab   ´
+  .runtime.writebarrierptr   Ò
+  0runtime.morestack_noctxt   ğ  R"".autotmp_0033  "type."".TestSuite "".autotmp_0032  type.bool "".autotmp_0031  "type."".TestSuite "".autotmp_0030  type.*uint8 "".autotmp_0029  type.error "".autotmp_0028  0type.*errors.errorString "".autotmp_0027  "type."".TestSuite "".autotmp_0026  type.*uint8 "".autotmp_0025  type.error "".autotmp_0024  0type.*errors.errorString "".autotmp_0023  "type."".TestSuite "".autotmp_0020 0type.*errors.errorString "".autotmp_0018  type.string "".autotmp_0017  type.int "".autotmp_0016  type.int "".autotmp_0015  type.int "".autotmp_0014  type.string "".autotmp_0008 ?type.string "".autotmp_0007  type.string "".autotmp_0006  type.string "".autotmp_0005  0type.*errors.errorString "".autotmp_0003  0type.*errors.errorString "".autotmp_0002 type.string "".autotmp_0001  0type.*errors.errorString "strings.suffixÂ·3 ¿type.string strings.sÂ·2 ÿtype.string "".~r0 ¿type.string "strings.suffixÂ·3 ßtype.string strings.sÂ·2 Ÿtype.string "".~r0 ßtype.error errors.textÂ·2 ßtype.string "".~r0 ÿtype.error errors.textÂ·2 ÿtype.string "".~r0 Ÿtype.error errors.textÂ·2 ¿type.string "".dir _type.string "".err type.error "".info Ÿ type.os.FileInfo "".~r2 ptype.error "".~r1  "type."".TestSuite "".path  type.string R"ğÓïğïïğ«ïğèïğåïğ_ À J(d:J(s*`Ô&
+H$‰ N }‘B¹=rD¹=`
+8Å¬S¶	< TgclocalsÂ·b91eaffbc19ffc4eb70d44d294297750 TgclocalsÂ·e255219d8588956397fe539e35994809   Â/Users/vikhyathmondreti/still-good-food/src/github.com/onsi/ginkgo/ginkgo/testsuite/test_suite.goş"".SuitesInDir  À  ºeH‹%    H„$ ÿÿÿH;A†x  Hì`  1ÛH‰œ$€  H‰œ$ˆ  H‰œ$  H    H‰$è    H‹\$Hƒû „1  HÇ„$È       HÇ„$Ğ       H‰œ$À   H‹œ$h  H‰$H‹œ$p  H‰\$è    ¶\$€û t8H‹œ$À   H‰œ$€  H‹œ$È   H‰œ$ˆ  H‹œ$Ğ   H‰œ$  HÄ`  ÃH‹œ$h  H‰$H‹œ$p  H‰\$è    H‹\$H‰œ$Ø   H‹\$H‰œ$à   H‹\$ H‰œ$è   H    H‰$HÇD$
+   è    H‹\$H‰\$`H‹”$Ø   H‹„$à   H‹œ$è   H‰œ$0  1ÉH‰„$(  H‰D$PH‰”$   H‰ĞH‹l$PH9éÉ  H‰D$hHƒø „ë  H‹H‹hH‰L$XH‰”$   H‰¬$˜   H‰¬$ˆ   H‰,$H‰”$€   H‹Z ÿÓ¶\$€û …‘  H‹œ$ˆ   H‰$H‹œ$€   H‹[8ÿÓH‹L$H‹D$HÇ$    H‰Œ$°   H‰L$H‰„$¸   H‰D$è    H\$H|$H‹H‰H‹KH‰OH‹KH‰OH‹\$`H‰$è    ¶\$ €û „
+  H‹œ$h  H‰$H‹œ$p  H‰\$H‹œ$Ø   H‰\$H‹œ$à   H‰\$H‹œ$è   H‰\$ è    H‹\$(H‰œ$8  H‹\$0H‰œ$@  H‹\$8H‰œ$H  H‹\$@H‰œ$P  ¶\$Hˆœ$X  ¶\$Iˆœ$Y  H‹Œ$À   H‹„$È   H‹”$Ğ   H‰ÃHÿÃH9Ó‡ü  H‰œ$È   H‰ËH‰ÅHkí(HëH¬$8  H‰\$H‰l$H-    H‰,$è    €¼$x   „h  H    H‰$HÇD$   è    H‹\$H‰\$`H‹”$Ø   H‹„$à   H‹œ$è   H‰œ$0  1ÉH‰„$(  H‰D$PH‰”$   H‰ĞH‹l$PH9éı  H‰D$hHƒø „6  H‹H‹hH‰L$XH‰”$   H‰¬$˜   H‰l$xH‰,$H‰T$pH‹Z ÿÓ¶\$€û „ö  H‹\$xH‰$H‹\$pH‹[8ÿÓH‹L$H‹D$HÇ$    H‰Œ$°   H‰L$H‰„$¸   H‰D$è    H\$H|$H‹H‰H‹KH‰OH‹KH‰OH‹\$`H‰$è    ¶\$ €û …u  H‹\$xH‰$H‹\$pH‹[8ÿÓH‹L$H‹D$HÇ$    H‹œ$h  H‰\$H‹œ$p  H‰\$H    H‰\$HÇD$    H‰Œ$    H‰L$(H‰„$¨   H‰D$0è    H\$8H‹H‰$H‹KH‰L$¶œ$x  ˆ\$è    H‹„$È   H‹\$H‰œ$  H‹|$ H‹\$(H‰œ$  H‹´$À   H‹Œ$Ğ   I‰ÀH‰„$ø   H‰¼$  HøH)ÈHƒø ~[H    H‰$H‰´$ğ   H‰t$L‰D$H‰Œ$   H‰L$H‰D$ è    L‹„$È   H‹¼$  H‹t$(H‹\$0H‰œ$ø   H‹L$8H    H‰$L‰ÃL‰ÅHıI‰ÈH‰Œ$   H9Í‡û   H9ë‡ò   H)İI)ØI‰ñH‰´$ğ   Iƒø tHkÛ(IÙH‰l$L‰D$L‰L$H‹œ$  H‰\$ H‰|$(H‹œ$  H‰\$0è    H‹Œ$   H‹œ$È   H‹¬$  HëH9ËwzH‰ØH‹œ$ğ   H‰œ$À   H‰„$È   H‰Œ$Ğ   H‹D$hH‹L$XHƒÀHÿÁH‹l$PH9éŒıÿÿH‹œ$À   H‰œ$€  H‹œ$È   H‰œ$ˆ  H‹œ$Ğ   H‰œ$  HÄ`  Ãè    è    ë™‰ éÃüÿÿH-    H‰,$H‰L$H‰D$H‰T$H‰\$ è    H‹L$(H‹D$0H‹T$8H‰ÃHÿÃH‰œ$È   H‰”$Ğ   H‰Œ$À   é¶ûÿÿH‹D$hH‹L$XHƒÀHÿÁéøùÿÿ‰ éúÿÿ‰éÈøÿÿè    écøÿÿB
+      ~  (type.[0]"".TestSuite   
+  "runtime.newobject   ª
+  0"".vendorExperimentCheck   ê
+  "io/ioutil.ReadDir   Æ  .go.string."_test\\.go$"   ê
+  $regexp.MustCompile   œ       ì       Ê
+  2runtime.stringtoslicebyte   ¦	
+  ,regexp.(*Regexp).Match   Ì
+
+  "".New     "type."".TestSuite    
+  (runtime.typedmemmove   Ê  "go.string."^[._]"   î
+  $regexp.MustCompile   ”       Ø       ¶
+  2runtime.stringtoslicebyte   ’
+  ,regexp.(*Regexp).Match   Ú       ¼  go.string."/"   –
+  *runtime.concatstring3   â
+  "".SuitesInDir   œ  &type.[]"".TestSuite   ö
+  &runtime.growslice_n   Ò  "type."".TestSuite   È
+  ,runtime.typedslicecopy   †
+  $runtime.panicslice   ”
+  $runtime.panicslice   ¸  &type.[]"".TestSuite   ò
+  "runtime.growslice   ¨
+  0runtime.morestack_noctxt   `À  6"".autotmp_0058 ß&type.[]"".TestSuite "".autotmp_0057   type.os.FileInfo "".autotmp_0056  "type.*os.FileInfo "".autotmp_0055  type.int "".autotmp_0054  type.int "".autotmp_0053 Ÿ type.os.FileInfo "".autotmp_0052 ï"type.*os.FileInfo "".autotmp_0051 Ÿtype.int "".autotmp_0050 type.int "".autotmp_0048 ¯&type.[]"".TestSuite "".autotmp_0047 ÿtype.string "".autotmp_0046  type.bool "".autotmp_0045  type.string "".autotmp_0044  type.bool "".autotmp_0043  $type.[]os.FileInfo "".autotmp_0042 O"type."".TestSuite "".autotmp_0040 ßtype.string "".autotmp_0039  type.bool "".autotmp_0038 $type.[]os.FileInfo "".file ß type.os.FileInfo "".file ¿ type.os.FileInfo 
+"".re ÿ&type.*regexp.Regexp "".files $type.[]os.FileInfo "".suites ¿&type.[]"".TestSuite "".~r2 0&type.[]"".TestSuite "".recurse  type.bool "".dir  type.string *"À¸¿À¦¿À   bb<?(8E#s¯ï
+#s£8		V F GM š(¯å£©Ÿ6
+h TgclocalsÂ·a403719089a78660e3772df73c41d159 TgclocalsÂ·638928c8a820d48f2f8771a2bac87454   Â/Users/vikhyathmondreti/still-good-food/src/github.com/onsi/ginkgo/ginkgo/testsuite/test_suite.goş"".relPath  À  ¼eH‹%    H;a†  Hƒì`1ÛH‰\$xH‰œ$€   H‹\$hH‰$H‹\$pH‰\$è    H‹\$H‰\$hH‹\$H‰\$pè    H‹$H‰\$@H‹\$H‰\$HH‹\$hH‰$H‹\$pH‰\$è    H‹L$H‹D$H‹\$@H‰$H‹\$HH‰\$H‰L$PH‰L$H‰D$XH‰D$è    H‹L$ H‹D$(HÇ$    H    H‰\$HÇD$   H‰L$hH‰L$H‰D$pH‰D$ è    H‹L$(H‹D$0H‰L$xH‰„$€   HƒÄ`Ãè    éâşÿÿ
+      t
+  "path/filepath.Abs   ¦
+  os.Getwd   ü
+  &path/filepath.Clean   è
+  "path/filepath.Rel   š  go.string."./"   è
+  *runtime.concatstring2   ª
+  0runtime.morestack_noctxt   @À  "".autotmp_0063 type.string "".cwd ?type.string "".~r1  type.string "".dir  type.string Àü¿À    š&,X@	  9D6m TgclocalsÂ·f47057354ec566066f8688a4970cff5a TgclocalsÂ·83ead081cd909acab0dcd88a450c1878   Â/Users/vikhyathmondreti/still-good-food/src/github.com/onsi/ginkgo/ginkgo/testsuite/test_suite.goş"".New  à  ÚeH‹%    H;a†  HƒìP1ÛH‰œ$€   H‰œ$ˆ   H‰œ$   H‰œ$˜   ˆœ$    ˆœ$¡   H‹\$XH‰$H‹\$`H‰\$è    H‹\$H‰\$@H‹\$H‰\$HH‹\$XH‰$H‹\$`H‰\$è    H‹\$H‰\$0H‹\$H‰\$8H‹\$XH‰$H‹\$`H‰\$H‹\$hH‰\$H‹\$pH‰\$H‹\$xH‰\$ è    ¶\$(1ÀH‹|$@H‹t$HH‹l$0H‹T$8H‰¼$€   H‰´$ˆ   H‰¬$   H‰”$˜   ˆœ$    ˆ„$¡   HƒÄPÃè    éÓşÿÿ
+
+      ¶
+  "".relPath   
+  ,"".packageNameForSuite   ¢
+  ."".filesHaveGinkgoSuite   È
+  0runtime.morestack_noctxt       
+"".autotmp_0065 ?type.string "".autotmp_0064 type.string "".~r2 P"type."".TestSuite "".files  $type.[]os.FileInfo "".dir  type.string  ‹Ÿ  °  ªG,,;3	  Z,J` TgclocalsÂ·ac2ab7dddcd25d1efd102c8473da2093 TgclocalsÂ·22c945fccb7e2b7a3b0e96106f7d23a0   Â/Users/vikhyathmondreti/still-good-food/src/github.com/onsi/ginkgo/ginkgo/testsuite/test_suite.goş,"".packageNameForSuite  €  òeH‹%    H;avcHƒì@1ÛH‰\$XH‰\$`H‹\$HH‰$H‹\$PH‰\$è    H‹L$H‹D$H‰L$0H‰$H‰D$8H‰D$è    H‹L$H‹D$H‰L$XH‰D$`HƒÄ@Ãè    ë‡
+      f
+  "path/filepath.Abs   ª
+  $path/filepath.Base   æ
+  0runtime.morestack_noctxt   @€  "".path type.string "".~r1  type.string "".dir  type.string €^€ € º"1 
+ 2N TgclocalsÂ·2fccd208efe70893f9ac8d682812ae72 TgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad   Â/Users/vikhyathmondreti/still-good-food/src/github.com/onsi/ginkgo/ginkgo/testsuite/test_suite.goş."".filesHaveGinkgoSuite  à
+  Ò
+eH‹%    HD$ H;A†‡  Hìà   H    H‰$HÇD$
+   è    H‹\$H‰\$XH    H‰$HÇD$   è    H‹\$H‰\$`H‹”$ø   H‹„$   H‹œ$  H‰œ$Ø   1ÉH‰„$Ğ   H‰D$HH‰”$È   H‰ĞH‹l$HH9éÙ  H‰D$hHƒø „Ü  H‹H‹hH‰L$PH‰”$€   H‰¬$ˆ   H‰l$xH‰,$H‰T$pH‹Z ÿÓ¶\$€û …œ  H‹\$xH‰$H‹\$pH‹[8ÿÓH‹L$H‹D$HÇ$    H‰Œ$    H‰L$H‰„$¨   H‰D$è    H\$H|$H‹H‰H‹KH‰OH‹KH‰OH‹\$XH‰$è    ¶\$ €û „  H‹\$xH‰$H‹\$pH‹[8ÿÓH‹L$H‹D$HÇ$    H‹œ$è   H‰\$H‹œ$ğ   H‰\$H    H‰\$HÇD$    H‰Œ$   H‰L$(H‰„$˜   H‰D$0è    H\$8H‹H‰$H‹KH‰L$è    H‹T$H‹L$H‹D$ H‹\$`H‰$H‰”$°   H‰T$H‰Œ$¸   H‰L$H‰„$À   H‰D$è    ¶\$ €û tÆ„$  HÄà   ÃH‹D$hH‹L$PHƒÀHÿÁH‹l$HH9éŒ'şÿÿÆ„$   HÄà   ÃëÏ‰ éşÿÿè    éWıÿÿ
+      D  .go.string."_test\\.go$"   h
+  $regexp.MustCompile   Š  Lgo.string."package ginkgo|\\/ginkgo\""   ®
+  $regexp.MustCompile   Ô       ˜       ö
+  2runtime.stringtoslicebyte   Ò
+  ,regexp.(*Regexp).Match   š       ü  go.string."/"   Ö
+  *runtime.concatstring3   Š
+  $io/ioutil.ReadFile   ’	
+  ,regexp.(*Regexp).Match   À
+
+  0runtime.morestack_noctxt   `À  "".autotmp_0078 ¿ type.os.FileInfo "".autotmp_0077 ï"type.*os.FileInfo "".autotmp_0076 ¯type.int "".autotmp_0075 Ÿtype.int "".autotmp_0073 Ÿtype.string "".autotmp_0071 type.string "".autotmp_0069 /$type.[]os.FileInfo "".contents _type.[]uint8 "".file ß type.os.FileInfo "".reGinkgo ÿ&type.*regexp.Regexp "".reTestFile &type.*regexp.Regexp "".~r2 Ptype.bool "".files  $type.[]os.FileInfo "".dir  type.string &ÀÇ¿À.¿À ° 8Ä##s£?	  3#”££ TgclocalsÂ·08a2a418f214728aa3b95cfbfdc42691 TgclocalsÂ·d0f8c49f6a17f334fd0f8fd635d2e61c   Â/Users/vikhyathmondreti/still-good-food/src/github.com/onsi/ginkgo/ginkgo/testsuite/test_suite.goş0"".vendorExperimentCheck  €  øeH‹%    H;a†ß   HƒìHH    H‰$HÇD$   è    H‹L$H‰L$(H‹D$H‰D$0Hƒø…    H‰$H‰D$H    H‰\$HÇD$   è    ¶\$ H‰Ø< tjH‹\$PH‰$H‹\$XH‰\$è    H‹L$H‹D$Hƒøu;H‰L$8H‰$H‰D$@H‰D$H    H‰\$HÇD$   è    ¶\$ ˆ\$`HƒÄHÃÆD$` ëôÆD$` ëí1Àë‡è    éÿÿÿ
+      4  @go.string."GO15VENDOREXPERIMENT"   X
+  os.Getenv   ´  go.string."1"   Ú
+   runtime.eqstring   ¢
+  path.Base   ö  $go.string."vendor"   œ
+   runtime.eqstring   æ
+  0runtime.morestack_noctxt   0  "".autotmp_0079 type.string &"".vendorExperiment ?type.string "".~r1  type.bool "".dir  type.string È  € (³  +Õ TgclocalsÂ·0b86ef39f3fed835f14ba5f4d7c62fa2 TgclocalsÂ·a8eabfc4a4514ed6b3b0c61e9680e440   Ğ/Users/vikhyathmondreti/still-good-food/src/github.com/onsi/ginkgo/ginkgo/testsuite/vendor_check_go15.goş"".init  à  ÆeH‹%    H;avM¶    €û t¶    €ûuÃè    Æ    è    è    è    è    è    è    Æ    Ãè    ë
+      $  "".initdoneÂ·   <  "".initdoneÂ·   R
+  "runtime.throwinit   b "".initdoneÂ·   n
+  io/ioutil.init   x
+  os.init   ‚
+  $path/filepath.init   Œ
+  regexp.init   –
+  strings.init    
+  path.init   ¬ "".initdoneÂ·   º
+  0runtime.morestack_noctxt        p p "p 
+ (H TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb   Ğ/Users/vikhyathmondreti/still-good-food/src/github.com/onsi/ginkgo/ginkgo/testsuite/vendor_check_go15.goş.type..hash."".TestSuite    ˜eH‹%    H;a†¯   Hƒì H‹\$(H‰$Hƒ<$ „‹   H‹\$0H‰\$è    H‹D$H‹\$(H‰$Hƒ<$ t^Hƒ$H‰D$0H‰D$è    H‹D$H‹\$(H‰$Hƒ<$ t,Hƒ$ H‰D$0H‰D$HÇD$   è    H‹\$H‰\$8HƒÄ Ã‰%    ëË‰%    ë™‰%    éiÿÿÿè    é4ÿÿÿ
+
+      l
+  runtime.strhash   ¾
+  runtime.strhash   ¢
+  runtime.memhash   †
+  0runtime.morestack_noctxt   0@  "".~r2  type.uintptr "".h type.uintptr "".p  $type.*"".TestSuite @Œ?@, Ğ Ğ  5› TgclocalsÂ·0b86ef39f3fed835f14ba5f4d7c62fa2 TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb   Â/Users/vikhyathmondreti/still-good-food/src/github.com/onsi/ginkgo/ginkgo/testsuite/test_suite.goş*type..eq."".TestSuite à  ÖeH‹%    H;a†N  HƒìHH‹\$PHƒû „4  H‹3H‹KH‹\$XHƒû „  H‹H‹CH9Á…ı   H‰t$8H‰4$H‰L$@H‰L$H‰T$(H‰T$H‰D$0H‰D$è    ¶\$ €û „Ã   H‹\$PHƒû „­   H‹SH‹CH‹\$XHƒû „   H‹sH‹KH9ÈuxH‰T$(H‰$H‰D$0H‰D$H‰t$8H‰t$H‰L$@H‰L$è    H‹L$PH‹D$X¶\$ €û t8¶Y ¶h @8ët
+ÆD$` HƒÄHÃ¶Y!¶h!@8ët
+ÆD$` HƒÄHÃÆD$`HƒÄHÃÆD$` HƒÄHÃ‰éjÿÿÿ‰éLÿÿÿÆD$` HƒÄHÃ‰éâşÿÿ‰éÅşÿÿè    é•şÿÿ
+      è
+   runtime.eqstring   Â
+   runtime.eqstring   Ä
+  0runtime.morestack_noctxt   0  "".autotmp_0084  type.string "".autotmp_0083  type.string "".autotmp_0082 ?type.string "".autotmp_0081 type.string "".~r2  type.bool "".q $type.*"".TestSuite "".p  $type.*"".TestSuite Jø		 ğ ğ  sı TgclocalsÂ·3bb21ca8fe1d99a3e492463bd711418a TgclocalsÂ·a8eabfc4a4514ed6b3b0c61e9680e440   Â/Users/vikhyathmondreti/still-good-food/src/github.com/onsi/ginkgo/ginkgo/testsuite/test_suite.goş4type..hash.[0]"".TestSuite à  ÊeH‹%    H;a†ˆ   Hƒì(H‹L$81ÀHÇD$    H‹l$H9è}\H‰D$ H‰ÅH‰ÈHÁÀH»¿c»kïR H¯ØH‰ØH‹\$0Hƒû t;Hkí(HëH‰$H‰D$8H‰D$è    H‹L$H‹D$ HÿÀH‹l$H9è|¤H‰L$@HƒÄ(Ã‰ëÁè    é[ÿÿÿ
+      ä
+  .type..hash."".TestSuite   ¸
+  0runtime.morestack_noctxt   0P  
+"".autotmp_0086 type.int "".autotmp_0085 type.int "".~r2  type.uintptr "".h type.uintptr "".p  *type.*[0]"".TestSuite POP ° ° 
+ q? TgclocalsÂ·0b86ef39f3fed835f14ba5f4d7c62fa2 TgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb   Â/Users/vikhyathmondreti/still-good-food/src/github.com/onsi/ginkgo/ginkgo/testsuite/test_suite.goş0type..eq.[0]"".TestSuite    eH‹%    H;a†ª  Hƒìh1ÀHÇD$(    H‹l$(H9èI  H‰D$0H‹L$pHƒù „r  H‹\$xH‰ÅHkí(HéHƒû „R  H‰ÅHkí(HëH‰L$@Hƒù „2  H‹1H‹IH‰\$8Hƒû „  H‹H‹CH9Á…ê   H‰t$XH‰4$H‰L$`H‰L$H‰T$HH‰T$H‰D$PH‰D$è    ¶\$ €û „°   H‹\$@Hƒû „µ   H‹SH‹CH‹\$8Hƒû „—   H‹sH‹KH9Èu}H‰T$HH‰$H‰D$PH‰D$H‰t$XH‰t$H‰L$`H‰L$è    H‹L$@H‹D$8¶\$ €û t=¶Y ¶h @8ëu0¶Y!¶h!@8ëu#H‹D$0HÿÀH‹l$(H9èŒ·şÿÿÆ„$€   HƒÄhÃÆ„$€    HƒÄhÃ‰ébÿÿÿ‰éDÿÿÿ‰éäşÿÿ‰éÇşÿÿ‰é§şÿÿ‰é‡şÿÿè    é9şÿÿ
+      ˆ
+   runtime.eqstring   â
+   runtime.eqstring   ü
+  0runtime.morestack_noctxt   0Ğ  "".autotmp_0094  type.string "".autotmp_0093  type.string "".autotmp_0092 ?type.string "".autotmp_0091 type.string "".autotmp_0090 _$type.*"".TestSuite "".autotmp_0089 O$type.*"".TestSuite "".autotmp_0088 type.int "".autotmp_0087 otype.int "".~r2  type.bool "".q *type.*[0]"".TestSuite "".p  *type.*[0]"".TestSuite &ĞîÏĞÏĞ= Ğ Ğ  Ã TgclocalsÂ·51af24152615272c3d9efc8538f95767 TgclocalsÂ·34eab47d33fa46b254c22cdccfd2dc77   Â/Users/vikhyathmondreti/still-good-food/src/github.com/onsi/ginkgo/ginkgo/testsuite/test_suite.goş0Bgo.itab.*errors.errorString.error     ş^go.string.hdr."this is a directory, not a file"                       Vgo.string."this is a directory, not a file"   şVgo.string."this is a directory, not a file" @  @this is a directory, not a file  ş*go.string.hdr.".test"                       "go.string.".test"   ş"go.string.".test"   .test  şTgo.string.hdr."this is not a .test binary"                       Lgo.string."this is not a .test binary"   şLgo.string."this is not a .test binary" @  6this is not a .test binary  şLgo.string.hdr."this is not executable"                       Dgo.string."this is not executable"   şDgo.string."this is not executable" 0  .this is not executable  şTgclocalsÂ·e255219d8588956397fe539e35994809     	   !             €                                    ˆ     €            şTgclocalsÂ·b91eaffbc19ffc4eb70d44d294297750 X  X	   	                               ş6go.string.hdr."_test\\.go$"             
+          .go.string."_test\\.go$"   ş.go.string."_test\\.go$"    _test\.go$  ş*go.string.hdr."^[._]"                       "go.string."^[._]"   ş"go.string."^[._]"   ^[._]  ş"go.string.hdr."/"                       go.string."/"   şgo.string."/"   /  şTgclocalsÂ·638928c8a820d48f2f8771a2bac87454 `  `
+                 3     € (      $  şTgclocalsÂ·a403719089a78660e3772df73c41d159 `  `
+                                     ş$go.string.hdr."./"                       go.string."./"   şgo.string."./"   ./  şTgclocalsÂ·83ead081cd909acab0dcd88a450c1878                   şTgclocalsÂ·f47057354ec566066f8688a4970cff5a                  şTgclocalsÂ·22c945fccb7e2b7a3b0e96106f7d23a0 (  (                 şTgclocalsÂ·ac2ab7dddcd25d1efd102c8473da2093 (  (   
+             şTgclocalsÂ·23e8278e2b69a3a75fa59b23c49ed6ad              şTgclocalsÂ·2fccd208efe70893f9ac8d682812ae72             şTgo.string.hdr."package ginkgo|\\/ginkgo\""                       Lgo.string."package ginkgo|\\/ginkgo\""   şLgo.string."package ginkgo|\\/ginkgo\"" @  2package ginkgo|\/ginkgo"  şTgclocalsÂ·d0f8c49f6a17f334fd0f8fd635d2e61c 0  0                    şTgclocalsÂ·08a2a418f214728aa3b95cfbfdc42691 0  0                   şHgo.string.hdr."GO15VENDOREXPERIMENT"                       @go.string."GO15VENDOREXPERIMENT"   ş@go.string."GO15VENDOREXPERIMENT" 0  *GO15VENDOREXPERIMENT  ş"go.string.hdr."1"                       go.string."1"   şgo.string."1"   1  ş,go.string.hdr."vendor"                       $go.string."vendor"   ş$go.string."vendor"   vendor  şTgclocalsÂ·a8eabfc4a4514ed6b3b0c61e9680e440              şTgclocalsÂ·0b86ef39f3fed835f14ba5f4d7c62fa2             şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           ş0"".initdoneÂ·  type.uint8   ş4"".PrecompiledTestSuiteÂ·f              ."".PrecompiledTestSuite   ş""".SuitesInDirÂ·f              "".SuitesInDir   ş"".relPathÂ·f              "".relPath   ş"".NewÂ·f              "".New   ş2"".packageNameForSuiteÂ·f              ,"".packageNameForSuite   ş4"".filesHaveGinkgoSuiteÂ·f              ."".filesHaveGinkgoSuite   ş6"".vendorExperimentCheckÂ·f              0"".vendorExperimentCheck   ş"".initÂ·f              "".init   şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           şTgclocalsÂ·0b86ef39f3fed835f14ba5f4d7c62fa2             şTgclocalsÂ·a8eabfc4a4514ed6b3b0c61e9680e440              şTgclocalsÂ·3bb21ca8fe1d99a3e492463bd711418a             ş6type..hashfunc."".TestSuite              .type..hash."".TestSuite   ş2type..eqfunc."".TestSuite              *type..eq."".TestSuite   ş,type..alg."".TestSuite                        6type..hashfunc."".TestSuite     2type..eqfunc."".TestSuite   ş"runtime.gcbits.01    şHgo.string.hdr."*testsuite.TestSuite"                       @go.string."*testsuite.TestSuite"   ş@go.string."*testsuite.TestSuite" 0  **testsuite.TestSuite  ş$type.*"".TestSuite                    X†Uc 6                                                        0   runtime.algarray   @  "runtime.gcbits.01   P  Hgo.string.hdr."*testsuite.TestSuite"   p  6go.weak.type.**"".TestSuite   €  "runtime.zerovalue     "type."".TestSuite   ş"runtime.gcbits.05    şFgo.string.hdr."testsuite.TestSuite"                       >go.string."testsuite.TestSuite"   ş>go.string."testsuite.TestSuite" 0  (testsuite.TestSuite  ş(go.string.hdr."Path"                        go.string."Path"   ş go.string."Path"   
+Path  ş6go.string.hdr."PackageName"                       .go.string."PackageName"   ş.go.string."PackageName"    PackageName  ş0go.string.hdr."IsGinkgo"                       (go.string."IsGinkgo"   ş(go.string."IsGinkgo"    IsGinkgo  ş6go.string.hdr."Precompiled"                       .go.string."Precompiled"   ş.go.string."Precompiled"    Precompiled  ş2go.string.hdr."TestSuite"             	          *go.string."TestSuite"   ş*go.string."TestSuite"    TestSuite  şngo.string.hdr."github.com/onsi/ginkgo/ginkgo/testsuite"             '          fgo.string."github.com/onsi/ginkgo/ginkgo/testsuite"   şfgo.string."github.com/onsi/ginkgo/ginkgo/testsuite" P  Pgithub.com/onsi/ginkgo/ginkgo/testsuite  ş"go.importpath."".             '          fgo.string."github.com/onsi/ginkgo/ginkgo/testsuite"   ş"type."".TestSuite  Ğ  Ğ(              İIı                                                                                                                                                                                                                              !                                               $0  ,type..alg."".TestSuite   @  "runtime.gcbits.05   P  Fgo.string.hdr."testsuite.TestSuite"   p  $type.*"".TestSuite   €  "runtime.zerovalue   À "type."".TestSuite   À  (go.string.hdr."Path"   à  type.string     6go.string.hdr."PackageName"   °  type.string   à  0go.string.hdr."IsGinkgo"   €  type.bool   °  6go.string.hdr."Precompiled"   Ğ  type.bool   `€ "type."".TestSuite   €  2go.string.hdr."TestSuite"     "go.importpath."".    Ğ "type."".TestSuite   şJgo.string.hdr."[]testsuite.TestSuite"                       Bgo.string."[]testsuite.TestSuite"   şBgo.string."[]testsuite.TestSuite" 0  ,[]testsuite.TestSuite  ş&type.[]"".TestSuite                   h{’                                                         0   runtime.algarray   @  "runtime.gcbits.01   P  Jgo.string.hdr."[]testsuite.TestSuite"   p  8go.weak.type.*[]"".TestSuite   €  "runtime.zerovalue     "type."".TestSuite   ş`go.typelink.[]testsuite.TestSuite	[]"".TestSuite              &type.[]"".TestSuite   şTgclocalsÂ·33cdeccccebe80329f1fdbee7f5874cb           şTgclocalsÂ·0b86ef39f3fed835f14ba5f4d7c62fa2             şTgclocalsÂ·34eab47d33fa46b254c22cdccfd2dc77                   şTgclocalsÂ·51af24152615272c3d9efc8538f95767                  ş<type..hashfunc.[0]"".TestSuite              4type..hash.[0]"".TestSuite   ş8type..eqfunc.[0]"".TestSuite              0type..eq.[0]"".TestSuite   ş2type..alg.[0]"".TestSuite                        <type..hashfunc.[0]"".TestSuite     8type..eqfunc.[0]"".TestSuite   şruntime.gcbits.      şLgo.string.hdr."[0]testsuite.TestSuite"                       Dgo.string."[0]testsuite.TestSuite"   şDgo.string."[0]testsuite.TestSuite" 0  .[0]testsuite.TestSuite  ş(type.[0]"".TestSuite À  À                Rz] ‘                                                                        0  2type..alg.[0]"".TestSuite   @  runtime.gcbits.   P  Lgo.string.hdr."[0]testsuite.TestSuite"   p  :go.weak.type.*[0]"".TestSuite   €  "runtime.zerovalue     "type."".TestSuite      &type.[]"".TestSuite   şdgo.typelink.[0]testsuite.TestSuite	[0]"".TestSuite              (type.[0]"".TestSuite   ş:go.string.hdr."[]os.FileInfo"                       2go.string."[]os.FileInfo"   ş2go.string."[]os.FileInfo"    []os.FileInfo  ş$type.[]os.FileInfo                   &¨h                                                         0   runtime.algarray   @  "runtime.gcbits.01   P  :go.string.hdr."[]os.FileInfo"   p  6go.weak.type.*[]os.FileInfo   €  "runtime.zerovalue      type.os.FileInfo   şNgo.typelink.[]os.FileInfo	[]os.FileInfo              $type.[]os.FileInfo   şNgo.string.hdr."*[0]testsuite.TestSuite"                       Fgo.string."*[0]testsuite.TestSuite"   şFgo.string."*[0]testsuite.TestSuite" 0  0*[0]testsuite.TestSuite  ş*type.*[0]"".TestSuite                   r=á 6                                                        0   runtime.algarray   @  "runtime.gcbits.01   P  Ngo.string.hdr."*[0]testsuite.TestSuite"   p  <go.weak.type.**[0]"".TestSuite   €  "runtime.zerovalue     (type.[0]"".TestSuite   ş.go.string.hdr."[]uint8"                       &go.string."[]uint8"   ş&go.string."[]uint8"   []uint8  ştype.[]uint8                   ß~.8                                                         0   runtime.algarray   @  "runtime.gcbits.01   P  .go.string.hdr."[]uint8"   p  *go.weak.type.*[]uint8   €  "runtime.zerovalue     type.uint8   ş6go.typelink.[]uint8	[]uint8              type.[]uint8   ş.go.string.hdr."runtime"                       &go.string."runtime"   ş&go.string."runtime"   runtime  ş,go.importpath.runtime.                       &go.string."runtime"   ş,go.string.hdr."errors"                       $go.string."errors"   ş$go.string."errors"   errors  ş*go.importpath.errors.                       $go.string."errors"   ş2go.string.hdr."io/ioutil"             	          *go.string."io/ioutil"   ş*go.string."io/ioutil"    io/ioutil  ş0go.importpath.io/ioutil.             	          *go.string."io/ioutil"   ş$go.string.hdr."os"                       go.string."os"   şgo.string."os"   os  ş"go.importpath.os.                       go.string."os"   ş:go.string.hdr."path/filepath"                       2go.string."path/filepath"   ş2go.string."path/filepath"    path/filepath  ş8go.importpath.path/filepath.                       2go.string."path/filepath"   ş.go.string.hdr."strings"                       &go.string."strings"   ş&go.string."strings"   strings  ş,go.importpath.strings.                       &go.string."strings"   ş,go.string.hdr."regexp"                       $go.string."regexp"   ş$go.string."regexp"   regexp  ş*go.importpath.regexp.                       $go.string."regexp"   ş(go.string.hdr."path"                        go.string."path"   ş go.string."path"   
+path  ş&go.importpath.path.                        go.string."path"   ş4type..hash."".TestSuiteÂ·f              .type..hash."".TestSuite   ş0type..eq."".TestSuiteÂ·f              *type..eq."".TestSuite   ş:type..hash.[0]"".TestSuiteÂ·f              4type..hash.[0]"".TestSuite   ş6type..eq.[0]"".TestSuiteÂ·f              0type..eq.[0]"".TestSuite   ş"runtime.zerovalue      ÿÿgo13ld 
